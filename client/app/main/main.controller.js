@@ -22,7 +22,11 @@ angular.module('demoappFullStackApp')
     };
 
     $scope.removeTodo = function (index) {
-      $scope.todos.splice(index, 1);
+      
+      Restangular.one('api/things', $scope.todos[index]._id).remove()
+      .then(function (docs) {
+        $scope.todos.splice(index, 1);
+      })
     };
 
 

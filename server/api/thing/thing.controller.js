@@ -14,7 +14,6 @@ var Thing = require('./thing.model');
 
 // Get list of things
 exports.index = function(req, res) {
-  console.log('vo day roi ne');
   Thing.find(function (err, things) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(things);
