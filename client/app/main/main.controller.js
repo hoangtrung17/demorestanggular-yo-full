@@ -5,17 +5,20 @@ angular.module('demoappFullStackApp')
     $scope.awesomeThings = [];
 
     // $scope.todos = ['Item 1', 'Item 2', 'Item 3'];
-    // $scope.todos = Restangular.all('api/todos');
+     var Todos = Restangular.all('api/things');
 
-    Restangular.all('api/todos').getList()  // GET: /users
+    Todos.getList()  // GET: /things
     .then(function(docs) {
-      // returns a list of users
+      // returns a list of things
       $scope.todos = docs; // first Restangular obj in list: { id: 123 }
     })
 
     $scope.addTodo = function () {
-      $scope.todos.push($scope.todo);
-      $scope.todo = '';
+      Todos.post($scope.todo)
+      .then(function(docs) {
+        $scope.todos.push($scope.todo);
+        $scope.todo = '';
+      });      
     };
 
     $scope.removeTodo = function (index) {
